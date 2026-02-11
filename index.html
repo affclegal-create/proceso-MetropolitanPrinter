@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Clientes | AFFC LEGAL</title>
+    <style>
+        :root {
+            --verde-oscuro: #0a2f1f; 
+            --dorado: #b8924a;       
+            --negro: #1a1a1a;        
+            --blanco: #ffffff;
+            --gris-claro: #f8f9fa;
+        }
+
+        body { 
+            font-family: 'Garamond', 'Georgia', serif; 
+            background-color: var(--negro); 
+            background-image: linear-gradient(135deg, #1a1a1a 0%, #0a2f1f 100%);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .main-wrapper {
+            display: flex;
+            max-width: 1000px;
+            width: 95%;
+            background: var(--blanco);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 1px solid var(--dorado);
+            min-height: 650px;
+        }
+
+        /* LADO IZQUIERDO: IMAGEN */
+        .side-image {
+            flex: 1;
+            background-image: url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+        }
+
+        .side-image::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(10, 47, 31, 0.85), transparent);
+        }
+
+        .image-text {
+            position: relative;
+            z-index: 1;
+            color: var(--dorado);
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* LADO DERECHO: CONTENIDO */
+        .content-section {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--blanco);
+        }
+
+        .header-brand {
+            padding: 40px 20px 20px;
+            text-align: center;
+            background: var(--verde-oscuro);
+            border-bottom: 4px solid var(--dorado);
+        }
+
+        .logo-placeholder { max-width: 100px; margin-bottom: 10px;}
+        .firma-nombre { color: var(--dorado); font-size: 24px; font-weight: bold; letter-spacing: 4px; text-transform: uppercase; margin: 0; }
+
+        /* SECCIONES INTERNAS */
+        #loginView, #menuView {
+            padding: 20px 40px;
+            transition: all 0.5s ease;
+        }
+
+        #menuView { display: none; text-align: center; }
+
+        .proceso-card {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--gris-claro);
+            border-left: 5px solid var(--verde-oscuro);
+            text-align: left;
+            color: var(--negro);
+        }
+
+        .proceso-card h4 { margin: 0 0 10px; color: var(--verde-oscuro); font-size: 14px; border-bottom: 1px solid var(--dorado); display: inline-block; }
+        .dato-linea { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 14px; }
+
+        .label { font-weight: bold; color: var(--verde-oscuro); }
+
+        /* BOTONES Y INPUTS */
+        input[type="password"] {
+            width: 100%; padding: 15px; margin-bottom: 15px; border: 1px solid #ccc; font-size: 16px; text-align: center; box-sizing: border-box;
+        }
+
+        .btn-main {
+            background-color: var(--verde-oscuro);
+            color: var(--dorado);
+            border: 1px solid var(--dorado);
+            padding: 16px;
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .btn-main:hover { background-color: var(--dorado); color: var(--verde-oscuro); }
+
+        .btn-menu {
+            background-color: var(--blanco);
+            color: var(--verde-oscuro);
+            border: 2px solid var(--verde-oscuro);
+            padding: 18px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 15px;
+            width: 100%;
+        }
+
+        .btn-menu:hover {
+            background-color: var(--verde-oscuro);
+            color: var(--blanco);
+            transform: translateX(5px);
+        }
+
+        .soporte-link { display: block; margin-top: 15px; font-size: 12px; color: #555; text-decoration: none; text-align: center; }
+        .soporte-link span { text-decoration: underline; color: var(--verde-oscuro); font-weight: bold; }
+
+        .firma-footer-info {
+            margin-top: auto;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+        }
+
+        @media (max-width: 768px) {
+            .main-wrapper { flex-direction: column; }
+            .side-image { height: 150px; flex: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    <div class="side-image">
+        <div class="image-text">AFFC LEGAL <br> <small style="font-size: 0.8rem; font-weight: normal;">Justicia y Compromiso</small></div>
+    </div>
+
+    <div class="content-section">
+        <div class="header-brand">
+            <img src="https://lh3.googleusercontent.com/PM7natXcelYg6Nbzs9fYRnSz-0HCl-7ctARYEUIEOTweibfjsSICHrS4JLtSnwtFinipQSocjWZAfJzk=s265-w265-h265" class="logo-placeholder" alt="Logo">
+            <h1 class="firma-nombre">AFFC LEGAL</h1>
+        </div>
+
+        <div id="loginView">
+            <div class="proceso-card">
+                <h4>DATOS DEL EXPEDIENTE</h4>
+                <div class="dato-linea"><span class="label">N° PROCESO:</span> <span id="view-proceso"></span></div>
+                <div class="dato-linea"><span class="label">CLIENTE:</span> <span id="view-cliente"></span></div>
+                <div class="dato-linea"><span class="label">DEMANDADO:</span> <span id="view-demandado"></span></div>
+            </div>
+            
+            <input type="password" id="passInput" placeholder="Contraseña">
+            <button class="btn-main" onclick="validarIngreso()">INGRESAR AL SISTEMA</button>
+            
+            <a id="whatsapp-link" href="#" class="soporte-link">
+                Si no recuerda su contraseña, <span>consulte aquí</span>
+            </a>
+        </div>
+
+        <div id="menuView">
+            <h3 style="color: var(--verde-oscuro); margin-bottom: 20px; border-bottom: 1px solid var(--dorado); padding-bottom: 10px;">PANEL DE GESTIÓN</h3>
+            
+            <button class="btn-menu" id="btn-actuaciones">⚖️ Actuaciones Procesales</button>
+            <button class="btn-menu" onclick="abrirAvanceProceso()">📈 Avance del proceso</button>
+
+            <button onclick="window.location.reload()" style="background:none; border:none; color: #999; cursor:pointer; font-size:12px; margin-top:15px;">← Cerrar Sesión</button>
+        </div>
+
+        <div class="firma-footer-info">
+            <strong>ESTUDIO JURÍDICO AFFC LEGAL S.A.S.</strong>
+            Bogotá D.C. | direccion.prospeccion@affclegal.com <br>
+            <em>"Defendiendo sus derechos con integridad."</em>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // 1. CONFIGURACIÓN DE DATOS GENERALES
+    // ==========================================
+    const DATA = {
+        nroProceso: "2026-Pendiente Asignación",
+        cliente: "FORKLIFTS DE COLOMBIA SAS",
+        demandado: "METROPOLITAN PRINTER SA",
+        passwordCorrecta: "901279985",
+        linkActuaciones: "https://drive.google.com/drive/folders/1OUismpyexiy6WtX-TiruCd6-36_ILQ7N?usp=sharing",
+        whatsappSoporte: "573022936593"
+    };
+
+    // ==========================================
+    // 2. CONFIGURACIÓN DE ETAPAS (AVANCE)
+    // Valores posibles: "ready" (Verde), "current" (Dorado/Pulso), "" (Gris)
+    // ==========================================
+    const ETAPAS = {
+        e1: "current",   
+        e2: "",   
+        e3: "",        
+        e4: "",        
+        e5: "", 
+        e6: "",        
+        e7: "",        
+        e8: "",        
+        e9: "",        
+        e10: "",       
+        e11: ""        
+    };
+
+    document.getElementById("view-proceso").innerText = DATA.nroProceso;
+    document.getElementById("view-cliente").innerText = DATA.cliente;
+    document.getElementById("view-demandado").innerText = DATA.demandado;
+    document.getElementById("whatsapp-link").href = `https://api.whatsapp.com/send?phone=${DATA.whatsappSoporte}&text=Hola%2C%20Quiero%20recuperar%20mi%20contraseña`;
+    document.getElementById("btn-actuaciones").onclick = () => window.open(DATA.linkActuaciones);
+
+    function validarIngreso() {
+        if (document.getElementById("passInput").value === DATA.passwordCorrecta) {
+            document.getElementById("loginView").style.display = "none";
+            document.getElementById("menuView").style.display = "block";
+        } else {
+            alert("Acceso denegado.");
+        }
+    }
+
+    function abrirAvanceProceso() {
+        const getBadge = (status) => {
+            if(status === 'ready') return '<span class="badge badge-ready">Completado</span>';
+            if(status === 'current') return '<span class="badge badge-current">En Gestión Actual</span>';
+            return '';
+        };
+
+        const htmlContent = `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avance de Proceso | AFFC LEGAL</title>
+    <style>
+        :root { --verde-oscuro: #0a2f1f; --dorado: #b8924a; --negro: #1a1a1a; --blanco: #ffffff; --gris-claro: #f4f4f4; --completado: #28a745; }
+        body { font-family: 'Garamond', 'Georgia', serif; background-color: var(--negro); background-image: linear-gradient(180deg, var(--negro) 0%, var(--verde-oscuro) 100%); margin: 0; padding: 40px 20px; color: var(--blanco); }
+        .container { max-width: 850px; margin: 0 auto; background: var(--blanco); border: 2px solid var(--dorado); border-radius: 4px; overflow: hidden; color: var(--negro); }
+        header { background: var(--verde-oscuro); padding: 40px 20px; text-align: center; border-bottom: 4px solid var(--dorado); }
+        .firma-nombre { color: var(--dorado); font-size: 28px; font-weight: bold; letter-spacing: 5px; text-transform: uppercase; margin: 10px 0; }
+        .resumen-header { background: var(--gris-claro); padding: 20px; display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; border-bottom: 1px solid #ddd; font-size: 14px; }
+        .resumen-header b { color: var(--verde-oscuro); display: block; font-size: 11px; text-transform: uppercase; }
+        .timeline { padding: 40px 30px; position: relative; }
+        .timeline::before { content: ''; position: absolute; left: 50px; top: 40px; bottom: 40px; width: 2px; background: #ddd; }
+        .etapa { position: relative; margin-bottom: 30px; padding-left: 80px; }
+        .punto { position: absolute; left: 36px; top: 0; width: 26px; height: 26px; background: var(--blanco); border: 3px solid #ccc; border-radius: 50%; z-index: 2; }
+        .etapa.ready .punto { background: var(--completado); border-color: var(--completado); }
+        .etapa.current .punto { background: var(--dorado); border-color: var(--verde-oscuro); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(184, 146, 74, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(184, 146, 74, 0); } 100% { box-shadow: 0 0 0 0 rgba(184, 146, 74, 0); } }
+        .etapa-card { background: var(--gris-claro); padding: 20px; border-radius: 4px; border-left: 5px solid #ccc; }
+        .ready .etapa-card { border-left-color: var(--completado); background: #f0fdf4; }
+        .current .etapa-card { border-left-color: var(--dorado); background: #fffdf5; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .etapa h3 { margin: 0 0 8px 0; font-size: 17px; color: var(--verde-oscuro); }
+        .etapa p { margin: 0; font-size: 14px; line-height: 1.5; color: #555; }
+        .badge { display: inline-block; margin-top: 10px; font-size: 10px; font-weight: bold; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; }
+        .badge-ready { background: var(--completado); color: white; }
+        .badge-current { background: var(--dorado); color: var(--negro); }
+        footer { background: #000; color: var(--dorado); padding: 40px 20px; text-align: center; font-size: 12px; }
+        .toolbar { display: flex; gap: 10px; margin-bottom: 20px; }
+        .btn-ui { background-color: var(--dorado); color: var(--negro); border: none; padding: 10px 20px; font-weight: bold; border-radius: 4px; cursor: pointer; text-transform: uppercase; font-size: 12px; display: flex; align-items: center; gap: 8px; }
+        @media print { .toolbar { display: none; } body { background: white; color: black; padding: 0; } .container { border: none; width: 100%; } header { background: #0a2f1f !important; -webkit-print-color-adjust: exact; } .firma-nombre { color: #b8924a !important; -webkit-print-color-adjust: exact; } }
+    </style>
+</head>
+<body>
+<div class="toolbar">
+    <button class="btn-ui" onclick="window.close()">← Volver al Panel</button>
+    <button class="btn-ui" onclick="window.print()">🖨️ Imprimir Avance</button>
+</div>
+<div class="container">
+    <header>
+        <img src="https://lh3.googleusercontent.com/PM7natXcelYg6Nbzs9fYRnSz-0HCl-7ctARYEUIEOTweibfjsSICHrS4JLtSnwtFinipQSocjWZAfJzk=s265-w265-h265" style="max-width: 80px;">
+        <div class="firma-nombre">AFFC LEGAL</div>
+        <p style="color: white; margin: 0; letter-spacing: 2px; font-size: 14px;">ESTADO DE AVANCE PROCESAL</p>
+    </header>
+
+    <div class="resumen-header">
+        <div><b>Expediente</b> ${DATA.nroProceso}</div>
+        <div><b>Cliente</b> ${DATA.cliente}</div>
+        <div><b>Demandado</b> ${DATA.demandado}</div>
+    </div>
+
+    <div class="timeline">
+        <div class="etapa ${ETAPAS.e1}"><div class="punto"></div><div class="etapa-card"><h3>1. Sustanciación y Radicación de la Demanda</h3><p>Preparación del título ejecutivo y asignación de juzgado por reparto.</p>${getBadge(ETAPAS.e1)}</div></div>
+        <div class="etapa ${ETAPAS.e2}"><div class="punto"></div><div class="etapa-card"><h3>2. Mandamiento de Pago</h3><p>Orden judicial de pago y decreto inicial de medidas cautelares.</p>${getBadge(ETAPAS.e2)}</div></div>
+        <div class="etapa ${ETAPAS.e3}"><div class="punto"></div><div class="etapa-card"><h3>3. Oficios de Embargo</h3><p>Notificación a entidades para congelar activos.</p>${getBadge(ETAPAS.e3)}</div></div>
+        <div class="etapa ${ETAPAS.e4}"><div class="punto"></div><div class="etapa-card"><h3>4. Embargo y Secuestro de Bienes</h3><p>Registro jurídico de la medida y aprehensión física.</p>${getBadge(ETAPAS.e4)}</div></div>
+        <div class="etapa ${ETAPAS.e5}"><div class="punto"></div><div class="etapa-card"><h3>5. Negociación Extrajudicial</h3><p>Acercamiento entre las partes para pactar un plan de pago.</p>${getBadge(ETAPAS.e5)}</div></div>
+        <div class="etapa ${ETAPAS.e6}"><div class="punto"></div><div class="etapa-card"><h3>6. Notificación al Deudor</h3><p>Comunicación oficial al demandado.</p>${getBadge(ETAPAS.e6)}</div></div>
+        <div class="etapa ${ETAPAS.e7}"><div class="punto"></div><div class="etapa-card"><h3>7. Sentencia de Seguir Adelante la Ejecución</h3><p>Decisión judicial que ordena continuar con el cobro.</p>${getBadge(ETAPAS.e7)}</div></div>
+        <div class="etapa ${ETAPAS.e8}"><div class="punto"></div><div class="etapa-card"><h3>8. Liquidación del Crédito y Costas</h3><p>Cálculo actualizado de la deuda e intereses.</p>${getBadge(ETAPAS.e8)}</div></div>
+        <div class="etapa ${ETAPAS.e9}"><div class="punto"></div><div class="etapa-card"><h3>9. Remate de Bienes</h3><p>Subasta pública de los bienes embargados.</p>${getBadge(ETAPAS.e9)}</div></div>
+        <div class="etapa ${ETAPAS.e10}"><div class="punto"></div><div class="etapa-card"><h3>10. Retiro de Títulos Judiciales</h3><p>Entrega del dinero depositado al acreedor.</p>${getBadge(ETAPAS.e10)}</div></div>
+        <div class="etapa ${ETAPAS.e11}"><div class="punto"></div><div class="etapa-card"><h3>11. Pago de la Obligación y Archivo</h3><p>Cancelación total y cierre definitivo del expediente.</p>${getBadge(ETAPAS.e11)}</div></div>
+    </div>
+
+    <footer>
+        <strong>AFFC LEGAL S.A.S.</strong><br>
+        Bogotá, Colombia | direccion.prospeccion@affclegal.com<br>
+        <em>"Seguridad y Excelencia Jurídica"</em>
+    </footer>
+</div>
+</body>
+</html>`;
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+    }
+</script>
+
+</body>
+
+</html>
